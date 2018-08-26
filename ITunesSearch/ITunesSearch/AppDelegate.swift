@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  ITunesSearch
+//  ItunesSearch
 //
-//  Created by Admin on 25.08.2018.
+//  Created by Admin on 26.08.2018.
 //  Copyright © 2018 Iulia Sigida. All rights reserved.
 //
 
