@@ -7,21 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		70AC767653EB2F325A72E47D /* Pods_ITunesSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13C97F68576F0840F145E775 /* Pods_ITunesSearch.framework */; };
 		840FE07B2131C9B1006590BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840FE07A2131C9B1006590BF /* AppDelegate.swift */; };
-		840FE07D2131C9B1006590BF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840FE07C2131C9B1006590BF /* ViewController.swift */; };
+		840FE07D2131C9B1006590BF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840FE07C2131C9B1006590BF /* SearchViewController.swift */; };
 		840FE0802131C9B1006590BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 840FE07E2131C9B1006590BF /* Main.storyboard */; };
 		840FE0822131C9B3006590BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 840FE0812131C9B3006590BF /* Assets.xcassets */; };
 		840FE0852131C9B3006590BF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 840FE0832131C9B3006590BF /* LaunchScreen.storyboard */; };
+		840FE0B7213221B3006590BF /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840FE0B6213221B3006590BF /* AlbumCell.swift */; };
+		840FE0B921322446006590BF /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840FE0B821322446006590BF /* SearchResult.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		13C97F68576F0840F145E775 /* Pods_ITunesSearch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ITunesSearch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		185FB8876A38679FDF7AEC0B /* Pods-ITunesSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ITunesSearch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ITunesSearch/Pods-ITunesSearch.debug.xcconfig"; sourceTree = "<group>"; };
+		2917008A326A8C5E48BD8B74 /* Pods-ITunesSearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ITunesSearch.release.xcconfig"; path = "Pods/Target Support Files/Pods-ITunesSearch/Pods-ITunesSearch.release.xcconfig"; sourceTree = "<group>"; };
 		840FE0772131C9B1006590BF /* ITunesSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ITunesSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		840FE07A2131C9B1006590BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		840FE07C2131C9B1006590BF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		840FE07C2131C9B1006590BF /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		840FE07F2131C9B1006590BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		840FE0812131C9B3006590BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		840FE0842131C9B3006590BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		840FE0862131C9B3006590BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		840FE0B6213221B3006590BF /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
+		840FE0B821322446006590BF /* SearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +37,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70AC767653EB2F325A72E47D /* Pods_ITunesSearch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A11C33DD6F6CA90246D2A46 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				185FB8876A38679FDF7AEC0B /* Pods-ITunesSearch.debug.xcconfig */,
+				2917008A326A8C5E48BD8B74 /* Pods-ITunesSearch.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		840FE06E2131C9B1006590BF = {
 			isa = PBXGroup;
 			children = (
+				840FE0B6213221B3006590BF /* AlbumCell.swift */,
 				840FE0792131C9B1006590BF /* ITunesSearch */,
 				840FE0782131C9B1006590BF /* Products */,
+				4A11C33DD6F6CA90246D2A46 /* Pods */,
+				ED0009C5757675F376F8A095 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -55,13 +76,22 @@
 			isa = PBXGroup;
 			children = (
 				840FE07A2131C9B1006590BF /* AppDelegate.swift */,
-				840FE07C2131C9B1006590BF /* ViewController.swift */,
+				840FE07C2131C9B1006590BF /* SearchViewController.swift */,
 				840FE07E2131C9B1006590BF /* Main.storyboard */,
 				840FE0812131C9B3006590BF /* Assets.xcassets */,
 				840FE0832131C9B3006590BF /* LaunchScreen.storyboard */,
+				840FE0B821322446006590BF /* SearchResult.swift */,
 				840FE0862131C9B3006590BF /* Info.plist */,
 			);
 			path = ITunesSearch;
+			sourceTree = "<group>";
+		};
+		ED0009C5757675F376F8A095 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				13C97F68576F0840F145E775 /* Pods_ITunesSearch.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +101,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 840FE0892131C9B3006590BF /* Build configuration list for PBXNativeTarget "ITunesSearch" */;
 			buildPhases = (
+				B4C25D1E674EB6482B47BDCE /* [CP] Check Pods Manifest.lock */,
 				840FE0732131C9B1006590BF /* Sources */,
 				840FE0742131C9B1006590BF /* Frameworks */,
 				840FE0752131C9B1006590BF /* Resources */,
+				36150EB789E13BE025214AC2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -130,13 +162,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		36150EB789E13BE025214AC2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ITunesSearch/Pods-ITunesSearch-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ITunesSearch/Pods-ITunesSearch-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B4C25D1E674EB6482B47BDCE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ITunesSearch-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		840FE0732131C9B1006590BF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				840FE07D2131C9B1006590BF /* ViewController.swift in Sources */,
+				840FE07D2131C9B1006590BF /* SearchViewController.swift in Sources */,
 				840FE07B2131C9B1006590BF /* AppDelegate.swift in Sources */,
+				840FE0B921322446006590BF /* SearchResult.swift in Sources */,
+				840FE0B7213221B3006590BF /* AlbumCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +351,7 @@
 		};
 		840FE08A2131C9B3006590BF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 185FB8876A38679FDF7AEC0B /* Pods-ITunesSearch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -296,6 +370,7 @@
 		};
 		840FE08B2131C9B3006590BF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2917008A326A8C5E48BD8B74 /* Pods-ITunesSearch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
