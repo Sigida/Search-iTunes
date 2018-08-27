@@ -50,6 +50,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="2nc-7u-Ob8"/>
                     <connections>
+                        <outlet property="collectionView" destination="jSU-sh-So5" id="Dv0-c3-JCO"/>
                         <segue destination="mOR-rD-zbm" kind="show" identifier="ShowDetail" id="uB9-3A-z5W"/>
                     </connections>
                 </viewController>
