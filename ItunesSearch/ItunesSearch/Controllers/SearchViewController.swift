@@ -11,26 +11,34 @@ import UIKit
 class SearchViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
+    
     // MARK: - Properties
+    
     var searchResults = [Album]()
-    var  hasSearched = false
+    var hasSearched = false
+    var isLoading = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        createSerchBar()
-        //Register nibs
-    var cellNib = UINib(nibName:CollectionViewCellIdentifiers.searchAlbumCell,
-                        bundle:nil)
-    collectionView.register(cellNib,
-                        forCellWithReuseIdentifier:CollectionViewCellIdentifiers.searchAlbumCell)
-    cellNib = UINib(nibName:CollectionViewCellIdentifiers.nothingFoundCell,
-                    bundle:nil)
-    collectionView.register(cellNib,
-                        forCellWithReuseIdentifier:CollectionViewCellIdentifiers.nothingFoundCell)
-    cellNib = UINib(nibName:CollectionViewCellIdentifiers.loadingCell,
-                    bundle:nil)
-    collectionView.register(cellNib,
-                            forCellWithReuseIdentifier:CollectionViewCellIdentifiers.loadingCell)
+       registerNibs()
+  
     }
+    func registerNibs(){
+        var cellNib = UINib(nibName:CollectionViewCellIdentifiers.searchAlbumCell,
+                            bundle:nil)
+        collectionView.register(cellNib,
+                                forCellWithReuseIdentifier:CollectionViewCellIdentifiers.searchAlbumCell)
+        cellNib = UINib(nibName:CollectionViewCellIdentifiers.nothingFoundCell,
+                        bundle:nil)
+        collectionView.register(cellNib,
+                                forCellWithReuseIdentifier:CollectionViewCellIdentifiers.nothingFoundCell)
+        cellNib = UINib(nibName:CollectionViewCellIdentifiers.loadingCell,
+                         bundle:nil)
+        collectionView.register(cellNib,
+                                forCellWithReuseIdentifier:CollectionViewCellIdentifiers.loadingCell)
+    }
+    
     func createSerchBar(){
         let searchBar = UISearchBar()
         searchBar.placeholder = "Artist Name"
@@ -40,40 +48,43 @@ class SearchViewController: UIViewController {
     }
 }
 
- extension SearchViewController: UISearchBarDelegate {
- func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
- if !searchBar.text!.isEmpty {
- //dissmiss Keybord
- searchBar.resignFirstResponder()
- searchResults = []
- if searchBar.text! != "Amanda"{
- for _ in 0...2 {
- let searchResult = Album()
- searchResult.albumName = searchBar.text!
- searchResults.append(searchResult)
+extension SearchViewController: UISearchBarDelegate {
+func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    if !searchBar.text!.isEmpty {
+          searchBar.resignFirstResponder()
+        isLoading = true
+        collectionView.reloadData()
+      hasSearched = true
+       // searchResults = []
+       //code request
+   // isLoading = false
+// collectionView.reloadData()
  }
  }
- hasSearched = true
-  collectionView.reloadData()
- }
- }
- }
+}
  extension SearchViewController: UICollectionViewDelegate,
  UICollectionViewDataSource {
  
  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
- if !hasSearched {
- return 0
+  if isLoading {
+    return 1
+ } else if !hasSearched {
+    return 0
  } else if searchResults.count == 0 {
- return 1
+    return 1
  } else {
- return searchResults.count
+    return searchResults.count
  }
  }
- func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
- 
- if searchResults.count == 0 {
- return collectionView.dequeueReusableCell(withReuseIdentifier:CollectionViewCellIdentifiers.nothingFoundCell,
+func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
+    if isLoading {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier:CollectionViewCellIdentifiers.loadingCell,
+                                                                  for:indexPath)
+    let spinner = cell.viewWithTag(700) as! UIActivityIndicatorView
+        spinner.startAnimating()
+    return cell
+    } else if searchResults.count == 0 {
+    return collectionView.dequeueReusableCell(withReuseIdentifier:CollectionViewCellIdentifiers.nothingFoundCell,
                                                            for:indexPath)
  } else {
  let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
