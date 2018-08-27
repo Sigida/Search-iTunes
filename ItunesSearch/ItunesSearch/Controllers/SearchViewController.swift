@@ -46,6 +46,44 @@ class SearchViewController: UIViewController {
         self.navigationItem.titleView = searchBar
         searchBar.becomeFirstResponder()//show keyboard when start the app
     }
+   //check request
+    func performRequest(with url: URL) -> Data? {
+        do {
+            return try Data(contentsOf:url)
+        } catch {
+            print("Download Error: \(error.localizedDescription)")
+           //show alert here .....
+    
+            return nil
+        }
+    }
+    
+    
+    //create url
+    func iTunesURL(searchText: String) -> URL {
+        let encodedText = searchText.addingPercentEncoding(
+            withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+         let urlString = String(format:
+        "https://itunes.apple.com/search?term=%@&entity=album", encodedText)
+        // let urlString = "https://itunes.apple.com/lookup?id=879273552&entity=song"
+       // let urlString = String(format:
+       //     "https://itunes.apple.com/lookup?id=%@&entity=song", encodedText)
+        
+        let url = URL(string: urlString)
+        return url!
+    }
+    
+    func parse(data: Data) -> [Album] {
+        do {
+            let decoder = JSONDecoder()
+            let result = try decoder.decode(Albums.self, from:data)
+            return result.results
+        } catch {
+            print("JSON Error: \(error)")
+            return []
+        }
+    }
+    
 }
 
 extension SearchViewController: UISearchBarDelegate {
@@ -54,14 +92,25 @@ func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
           searchBar.resignFirstResponder()
         isLoading = true
         collectionView.reloadData()
-      hasSearched = true
-       // searchResults = []
-       //code request
-   // isLoading = false
-// collectionView.reloadData()
- }
- }
+        hasSearched = true
+        searchResults = []
+        let queue = DispatchQueue.global()
+        let url = self.iTunesURL(searchText: searchBar.text!)
+        queue.async {
+            if let data = self.performRequest(with: url) {
+                self.searchResults = self.parse(data: data)
+                self.searchResults.sort(by: <)
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                    self.collectionView.reloadData()
+                }
+                return
+            }
+        }
+    }
+    }
 }
+
  extension SearchViewController: UICollectionViewDelegate,
  UICollectionViewDataSource {
  
@@ -93,6 +142,7 @@ func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:
  let searchResult = searchResults[indexPath.row]
  cell.backgroundColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
  cell.albumNameLabel.text = searchResult.albumName
+        print(searchResult.albumID)
   
  return cell
  }

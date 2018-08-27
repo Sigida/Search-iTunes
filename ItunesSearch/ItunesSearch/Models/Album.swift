@@ -7,6 +7,39 @@
 //
 
 import Foundation
-class Album {
-    var albumName = ""
+class Albums:Codable {
+    var resultCount = 0
+    var results = [Album]()
 }
+class Album: Codable {
+ 
+    var artistName: String
+    var albumID:Int = 0
+    var albumName:String
+    var trackName:String?
+    var image : String
+    var collectionPrice : Double
+    var trackCount:Int
+    //var realeaseDate:Date
+    var genre:String
+    
+    enum CodingKeys: String, CodingKey {
+        case image = "artworkUrl100"
+        case albumName  = "collectionName"
+        case albumID = "collectionId"
+        case genre = "primaryGenreName"
+        case artistName, trackName
+        case collectionPrice
+        case trackCount
+        // case realeaseDate
+    }
+
+
+    static func < (lhs: Album, rhs: Album) -> Bool {
+        return lhs.albumName.localizedStandardCompare(rhs.albumName) == .orderedAscending
+    }
+    
+    
+}
+    
+
