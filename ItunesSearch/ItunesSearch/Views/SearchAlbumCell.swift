@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SerchAlbumCell: UICollectionViewCell {
+class SearchAlbumCell: UICollectionViewCell {
 
     @IBOutlet weak var artworkImageView: UIImageView!
     @IBOutlet weak var albumNameLabel: UILabel!

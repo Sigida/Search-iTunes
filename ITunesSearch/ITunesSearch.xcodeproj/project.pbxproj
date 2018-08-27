@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		841015B8213322F800E97B17 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841015B7213322F800E97B17 /* DetailViewController.swift */; };
-		841015BB2133293800E97B17 /* SerchAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841015B92133293800E97B17 /* SerchAlbumCell.swift */; };
-		841015BC2133293800E97B17 /* SerchAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 841015BA2133293800E97B17 /* SerchAlbumCell.xib */; };
+		841015BB2133293800E97B17 /* SearchAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841015B92133293800E97B17 /* SearchAlbumCell.swift */; };
+		841015BC2133293800E97B17 /* SearchAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 841015BA2133293800E97B17 /* SearchAlbumCell.xib */; };
 		841015C021332B9B00E97B17 /* NothingFoundCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 841015BF21332B9B00E97B17 /* NothingFoundCell.xib */; };
 		8411EFBE21330A1F001E08BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8411EFBD21330A1F001E08BB /* AppDelegate.swift */; };
 		8411EFC021330A1F001E08BB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8411EFBF21330A1F001E08BB /* SearchViewController.swift */; };
@@ -23,8 +23,8 @@
 
 /* Begin PBXFileReference section */
 		841015B7213322F800E97B17 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		841015B92133293800E97B17 /* SerchAlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerchAlbumCell.swift; sourceTree = "<group>"; };
-		841015BA2133293800E97B17 /* SerchAlbumCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SerchAlbumCell.xib; sourceTree = "<group>"; };
+		841015B92133293800E97B17 /* SearchAlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAlbumCell.swift; sourceTree = "<group>"; };
+		841015BA2133293800E97B17 /* SearchAlbumCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchAlbumCell.xib; sourceTree = "<group>"; };
 		841015BF21332B9B00E97B17 /* NothingFoundCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NothingFoundCell.xib; sourceTree = "<group>"; };
 		8411EFBA21330A1F001E08BB /* ItunesSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ItunesSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8411EFBD21330A1F001E08BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -101,7 +101,7 @@
 		8411EFD121331033001E08BB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				841015B92133293800E97B17 /* SerchAlbumCell.swift */,
+				841015B92133293800E97B17 /* SearchAlbumCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -132,9 +132,9 @@
 		8411EFD521331098001E08BB /* Storyboards+Nibs */ = {
 			isa = PBXGroup;
 			children = (
+				841015BA2133293800E97B17 /* SearchAlbumCell.xib */,
 				8411EFC121330A1F001E08BB /* Main.storyboard */,
 				8411EFC621330A20001E08BB /* LaunchScreen.storyboard */,
-				841015BA2133293800E97B17 /* SerchAlbumCell.xib */,
 				841015BF21332B9B00E97B17 /* NothingFoundCell.xib */,
 				845219B721341940002E0795 /* LoadingCell.xib */,
 			);
@@ -208,7 +208,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8411EFC821330A20001E08BB /* LaunchScreen.storyboard in Resources */,
-				841015BC2133293800E97B17 /* SerchAlbumCell.xib in Resources */,
+				841015BC2133293800E97B17 /* SearchAlbumCell.xib in Resources */,
 				8411EFC521330A20001E08BB /* Assets.xcassets in Resources */,
 				845219B821341940002E0795 /* LoadingCell.xib in Resources */,
 				841015C021332B9B00E97B17 /* NothingFoundCell.xib in Resources */,
@@ -224,7 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				841015B8213322F800E97B17 /* DetailViewController.swift in Sources */,
-				841015BB2133293800E97B17 /* SerchAlbumCell.swift in Sources */,
+				841015BB2133293800E97B17 /* SearchAlbumCell.swift in Sources */,
 				8411EFC021330A1F001E08BB /* SearchViewController.swift in Sources */,
 				845219BA21342914002E0795 /* Album.swift in Sources */,
 				8411EFBE21330A1F001E08BB /* AppDelegate.swift in Sources */,

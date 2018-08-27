@@ -14,7 +14,7 @@ struct Constants {
     }
 }
 struct CollectionViewCellIdentifiers {
-    static let searchResultCell = "SearchResultCell"
+    static let searchAlbumCell = "SearchAlbumCell"
     static let nothingFoundCell = "NothingFoundCell"
     static let loadingCell = "LoadingCell"
 }
