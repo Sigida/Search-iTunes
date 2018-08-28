@@ -19,6 +19,7 @@
 		845219B821341940002E0795 /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 845219B721341940002E0795 /* LoadingCell.xib */; };
 		845219BA21342914002E0795 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845219B921342914002E0795 /* Album.swift */; };
 		845219BC21343095002E0795 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845219BB21343095002E0795 /* Constants.swift */; };
+		8480BF532135B52B005F906A /* UIImageView+DownloadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8480BF522135B52B005F906A /* UIImageView+DownloadImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		845219B721341940002E0795 /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
 		845219B921342914002E0795 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		845219BB21343095002E0795 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		8480BF522135B52B005F906A /* UIImageView+DownloadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+DownloadImage.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 		8411EFD021330FF9001E08BB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				8480BF522135B52B005F906A /* UIImageView+DownloadImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8480BF532135B52B005F906A /* UIImageView+DownloadImage.swift in Sources */,
 				841015B8213322F800E97B17 /* DetailViewController.swift in Sources */,
 				841015BB2133293800E97B17 /* SearchAlbumCell.swift in Sources */,
 				8411EFC021330A1F001E08BB /* SearchViewController.swift in Sources */,

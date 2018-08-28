@@ -153,9 +153,8 @@ func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:
                                                    CollectionViewCellIdentifiers.searchAlbumCell,
                                                                for: indexPath) as! SearchAlbumCell
  let searchResult = searchResults[indexPath.row]
- cell.backgroundColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
- cell.albumNameLabel.text = searchResult.albumName
-        print(searchResult.albumID)
+ //cell.backgroundColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
+ cell.configure(for: searchResult)
   
  return cell
  }
