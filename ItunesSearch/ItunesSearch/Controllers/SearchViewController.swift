@@ -25,6 +25,16 @@ class SearchViewController: UIViewController {
        registerNibs()
   
     }
+    // MARK:- Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.Segue.showDetail {
+            let detailViewController = segue.destination as! DetailViewController
+            let indexPath = sender as! IndexPath
+            let searchResult = searchResults[indexPath.row]
+            detailViewController.searchResult = searchResult
+        }
+    }
+    
     func registerNibs(){
         var cellNib = UINib(nibName:CollectionViewCellIdentifiers.searchAlbumCell,
                             bundle:nil)
@@ -95,7 +105,7 @@ func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let url = self.iTunesURL(searchText: searchBar.text!)
         let session = URLSession.shared
         dataTask = session.dataTask(with: url, completionHandler: { data, response, error in
-            print("On main thread? " + (Thread.current.isMainThread ? "Yes" : "No"))
+           // print("On main thread? " + (Thread.current.isMainThread ? "Yes" : "No"))
             if let error = error as NSError?, error.code == -999 {
                 return
             } else if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
@@ -159,5 +169,9 @@ func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:
  return cell
  }
  }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier:Constants.Segue.showDetail, sender: indexPath)
+    }
  }
 

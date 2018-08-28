@@ -10,7 +10,7 @@ import Foundation
 
 struct Constants {
     struct Segue {
-        static let showDetail = "ShowDetail "
+        static let showDetail = "ShowDetail"
     }
 }
 struct CollectionViewCellIdentifiers {

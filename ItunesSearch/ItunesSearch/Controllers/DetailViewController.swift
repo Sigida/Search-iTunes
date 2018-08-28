@@ -9,27 +9,44 @@
 import UIKit
 
 class DetailViewController: UIViewController {
+    
+    @IBOutlet weak var artworkImageView: UIImageView!
+    @IBOutlet weak var albumNameLabel: UILabel!
+    @IBOutlet weak var artistNameLabel: UILabel!
+    @IBOutlet weak var trackCountLabel: UILabel!
+    @IBOutlet weak var genreLabel: UILabel!
+    @IBOutlet weak var releaseDateLabel: UILabel!
+    var searchResult: Album!
+    var downloadTask: URLSessionDownloadTask?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        if searchResult != nil {
+            updateUI()
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    deinit {
+        print("deinit \(self)")
+        downloadTask?.cancel()
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func updateUI() {
+       
+        albumNameLabel.text = searchResult.albumName
+        genreLabel.text = searchResult.genre
+        artistNameLabel.text = searchResult.artistName
+        trackCountLabel.text = String(searchResult.trackCount)
+        genreLabel.text = searchResult.genre
+        
+       
+        // let formatter = DateFormatter()
+        // formatter.dateStyle = .medium
+        // formatter.timeStyle = .short
+        // formatter.date(from: searchResult.releaseDate)
+        releaseDateLabel.text = searchResult.releaseDate
+     
+        // Get image
+        if let imageURL = URL(string: searchResult.image) {
+            downloadTask = artworkImageView.loadImage(url: imageURL)
+        }
     }
-    */
-
 }

@@ -20,7 +20,7 @@ class Album: Codable {
     var image : String
     var collectionPrice : Double
     var trackCount:Int
-    //var realeaseDate:Date
+    var releaseDate:String
     var genre:String
     
     enum CodingKeys: String, CodingKey {
@@ -31,7 +31,7 @@ class Album: Codable {
         case artistName, trackName
         case collectionPrice
         case trackCount
-        // case realeaseDate
+        case releaseDate
     }
 
 

@@ -27,7 +27,6 @@ class SearchAlbumCell: UICollectionViewCell {
  
     func configure(for result: Album) {
         albumNameLabel.text = result.albumName
-        artworkImageView.image = UIImage(named: "Placeholder")
         if let imageURL = URL(string: result.image) {
             downloadTask = artworkImageView.loadImage(url: imageURL)
         }
