@@ -17,6 +17,7 @@ class SearchViewController: UIViewController {
     var searchResults = [Album]()
     var hasSearched = false
     var isLoading = false
+    var dataTask: URLSessionDataTask?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,19 +47,7 @@ class SearchViewController: UIViewController {
         self.navigationItem.titleView = searchBar
         searchBar.becomeFirstResponder()//show keyboard when start the app
     }
-   //check request
-    func performRequest(with url: URL) -> Data? {
-        do {
-            return try Data(contentsOf:url)
-        } catch {
-            print("Download Error: \(error.localizedDescription)")
-           //show alert here .....
-    
-            return nil
-        }
-    }
-    
-    
+   
     //create url
     func iTunesURL(searchText: String) -> URL {
         let encodedText = searchText.addingPercentEncoding(
@@ -90,23 +79,35 @@ extension SearchViewController: UISearchBarDelegate {
 func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     if !searchBar.text!.isEmpty {
           searchBar.resignFirstResponder()
+        dataTask?.cancel()//stop previous search
         isLoading = true
         collectionView.reloadData()
         hasSearched = true
         searchResults = []
-        let queue = DispatchQueue.global()
+       
         let url = self.iTunesURL(searchText: searchBar.text!)
-        queue.async {
-            if let data = self.performRequest(with: url) {
-                self.searchResults = self.parse(data: data)
-                self.searchResults.sort(by: <)
-                DispatchQueue.main.async {
-                    self.isLoading = false
-                    self.collectionView.reloadData()
-                }
+        let session = URLSession.shared
+        dataTask = session.dataTask(with: url, completionHandler: { data, response, error in
+            print("On main thread? " + (Thread.current.isMainThread ? "Yes" : "No"))
+            if let error = error as NSError?, error.code == -999 {
                 return
+            } else if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                if let data = data {
+                    self.searchResults = self.parse(data: data)
+                    self.searchResults.sort(by: <)
+                    DispatchQueue.main.async {
+                        //print("On main thread? " + (Thread.current.isMainThread ? "Yes" : "No"))
+                        self.isLoading = false
+                        self.collectionView.reloadData()
+                    }
+                    return
+                }
+            } else {
+                print("Failure! \(response!)")
             }
-        }
+        
+        })
+        dataTask?.resume()//start search
     }
     }
 }
