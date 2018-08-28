@@ -13,15 +13,15 @@ class Albums:Codable {
 }
 class Album: Codable {
  
-    var artistName: String
+    var artistName: String?
     var albumID:Int = 0
-    var albumName:String
+    var albumName = ""
     var trackName:String?
-    var image : String
-    var collectionPrice : Double
-    var trackCount:Int
-    var releaseDate:String
-    var genre:String
+    var image = ""
+   // var collectionPrice : Double?
+    var trackCount = 0
+    var releaseDate:String?
+    var genre:String?
     
     enum CodingKeys: String, CodingKey {
         case image = "artworkUrl100"
@@ -29,7 +29,7 @@ class Album: Codable {
         case albumID = "collectionId"
         case genre = "primaryGenreName"
         case artistName, trackName
-        case collectionPrice
+      //  case collectionPrice
         case trackCount
         case releaseDate
     }
