@@ -72,8 +72,15 @@ class SearchViewController: UIViewController {
             return []
         }
     }
-    
+    func showNetworkError() {
+        let alert = UIAlertController(title: "Whoops...", message: "There was an error accessing the iTunes Store. Please try again.", preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
 }
+    
+
 
 extension SearchViewController: UISearchBarDelegate {
 func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -105,7 +112,12 @@ func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
             } else {
                 print("Failure! \(response!)")
             }
-        
+            DispatchQueue.main.async {
+                self.hasSearched = false
+                self.isLoading = false
+                self.collectionView.reloadData()
+                self.showNetworkError()//if can't connect to the itunes store (change they url adress or something alse) this line will execute
+            }
         })
         dataTask?.resume()//start search
     }
