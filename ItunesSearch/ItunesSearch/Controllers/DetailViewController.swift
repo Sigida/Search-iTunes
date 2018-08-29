@@ -20,13 +20,14 @@ class DetailViewController: UIViewController {
     var searchResult: Album!
     var songs = [String]()
     var downloadTask: URLSessionDownloadTask?
+    
    private let search = SearchService()
     override func viewDidLoad() {
         super.viewDidLoad()
         if searchResult != nil {
             updateUI()
         }
-        search.getSongsForAlbum(with: searchResult.albumID) { (resalts:[String]) in
+        search.getSongsForAlbum(with: searchResult.albumID ) { (resalts:[String]) in
             self.songs = resalts
             print(resalts)
             DispatchQueue.main.async {
@@ -37,6 +38,7 @@ class DetailViewController: UIViewController {
     deinit {
         print("deinit \(self)")
         downloadTask?.cancel()
+        
     }
     func updateUI() {
        

@@ -20,7 +20,7 @@ class SearchService {
     private(set) var state: State = .notSearchedYet
     private var dataTask: URLSessionDataTask? = nil
     typealias SearchComplete = (Bool) -> Void
-    
+   
     
     //create url
     private func iTunesAlbumURL(searchText: String) -> URL {
@@ -92,7 +92,9 @@ class SearchService {
     }
     
     func getSongsForAlbum(with albumId:Int, completion: @escaping ([String]) -> Void){
+        
         let url = iTunesSongURL(albumID: albumId)
+        
         dataTask = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
             var songArray:[String] = []
             if let httpResponse = response as? HTTPURLResponse,
