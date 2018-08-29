@@ -9,16 +9,17 @@
 import Foundation
 
 class SearchService {
-    
-    // MARK: - Properties
-    var searchResults: [Album] = []
-    var hasSearched = false
-    var isLoading = false
+
+    enum State {
+        case notSearchedYet
+        case loading
+        case noResults
+        case results([Album])
+    }
+    private(set) var state: State = .notSearchedYet
+    private var dataTask: URLSessionDataTask? = nil
     typealias SearchComplete = (Bool) -> Void
     
-    
-    
-    private var dataTask: URLSessionDataTask? = nil
     
     //create url
     private func iTunesURL(searchText: String) -> URL {
@@ -48,36 +49,31 @@ class SearchService {
         if !text.isEmpty {
             dataTask?.cancel()
             
-            isLoading = true
-            hasSearched = true
-            searchResults = []
+         state = .loading
             
             let url = iTunesURL(searchText: text)
             let session = URLSession.shared
             dataTask = session.dataTask(with: url, completionHandler: {
                 data, response, error in
                  var success = false
+                 var newState = State.notSearchedYet
                 // Was the search cancelled?
                 if let error = error as NSError?, error.code == -999 {
                     return
                 }
-                
                 if let httpResponse = response as? HTTPURLResponse,
                     httpResponse.statusCode == 200, let data = data {
-                    self.searchResults = self.parse(data: data)
-                    self.searchResults.sort(by: <)
-                    
-                    print("Success!")
-                    self.isLoading = false
+                    var searchResults = self.parse(data: data)
+                    if searchResults.isEmpty {
+                        newState = .noResults
+                    }else {
+                        searchResults.sort(by: <)
+                        newState = .results(searchResults)
+                    }
                     success = true
-                    
                 }
-                
-                if !success{
-                self.hasSearched = false
-                self.isLoading = false
-                }
-                 DispatchQueue.main.async {
+                DispatchQueue.main.async {
+                    self.state = newState
                     completion(success)
                 }
             })
@@ -85,7 +81,7 @@ class SearchService {
         }
     }
     
-    }
+}
     
 
     

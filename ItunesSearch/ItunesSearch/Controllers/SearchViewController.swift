@@ -23,10 +23,13 @@ class SearchViewController: UIViewController {
     // MARK:- Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.Segue.showDetail {
-            let detailViewController = segue.destination as! DetailViewController
-            let indexPath = sender as! IndexPath
-            let searchResult = search.searchResults[indexPath.row]
-            detailViewController.searchResult = searchResult
+            if case .results(let list) = search.state {
+                let detailViewController = segue.destination
+                    as! DetailViewController
+                let indexPath = sender as! IndexPath
+                let searchResult = list[indexPath.row]
+                detailViewController.searchResult = searchResult
+            }
         }
     }
     
@@ -82,37 +85,50 @@ func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
  UICollectionViewDataSource {
  
  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-  if search.isLoading {
-    return 1
- } else if !search.hasSearched {
-    return 0
- } else if search.searchResults.count == 0 {
-    return 1
- } else {
-    return search.searchResults.count
- }
- }
+    switch search.state {
+    case .notSearchedYet:
+        return 0
+    case .loading:
+        return 1
+    case .noResults:
+        return 1
+    case .results(let list):
+        return list.count
+    }
+    }
+    
 func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
-    if search.isLoading {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier:CollectionViewCellIdentifiers.loadingCell,
-                                                                  for:indexPath)
-    let spinner = cell.viewWithTag(700) as! UIActivityIndicatorView
+    switch search.state {
+    case .notSearchedYet:
+        fatalError("Should never get here")
+        
+    case .loading:
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: CollectionViewCellIdentifiers.loadingCell,
+            for: indexPath)
+        
+        let spinner = cell.viewWithTag(700) as!
+        UIActivityIndicatorView
         spinner.startAnimating()
-    return cell
-    } else if search.searchResults.count == 0 {
-    return collectionView.dequeueReusableCell(withReuseIdentifier:CollectionViewCellIdentifiers.nothingFoundCell,
-                                                           for:indexPath)
- } else {
- let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
-                                                   CollectionViewCellIdentifiers.searchAlbumCell,
-                                                               for: indexPath) as! SearchAlbumCell
- let searchResult = search.searchResults[indexPath.row]
- //cell.backgroundColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
- cell.configure(for: searchResult)
-  
- return cell
- }
- }
+        return cell
+        
+    case .noResults:
+    
+        return collectionView.dequeueReusableCell(
+            withReuseIdentifier: CollectionViewCellIdentifiers.nothingFoundCell,
+            for: indexPath)
+        
+    case .results(let list):
+        
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: CollectionViewCellIdentifiers.searchAlbumCell,
+            for: indexPath) as! SearchAlbumCell
+        
+        let searchResult = list[indexPath.row]
+        cell.configure(for: searchResult)
+        return cell
+    }
+    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.performSegue(withIdentifier:Constants.Segue.showDetail, sender: indexPath)
