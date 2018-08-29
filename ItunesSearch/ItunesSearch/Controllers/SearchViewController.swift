@@ -75,8 +75,7 @@ func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
                 self.showNetworkError()
             }
             self.collectionView.reloadData()
-        })
-        
+        })        
         collectionView.reloadData()
         searchBar.resignFirstResponder()
     }

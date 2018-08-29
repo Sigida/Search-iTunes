@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class SearchService {
 
@@ -22,18 +23,24 @@ class SearchService {
     
     
     //create url
-    private func iTunesURL(searchText: String) -> URL {
+    private func iTunesAlbumURL(searchText: String) -> URL {
         let encodedText = searchText.addingPercentEncoding(
             withAllowedCharacters: CharacterSet.urlQueryAllowed)!
         let urlString = String(format:
             "https://itunes.apple.com/search?term=%@&entity=album", encodedText)
-        // let urlString = "https://itunes.apple.com/lookup?id=879273552&entity=song"
-        // let urlString = String(format:
-        //     "https://itunes.apple.com/lookup?id=%@&entity=song", encodedText)
-        
         let url = URL(string: urlString)
         return url!
     }
+    private func iTunesSongURL(albumID: Int) -> URL {
+       
+        let urlString = String(format:
+            "https://itunes.apple.com/lookup?id=%d&entity=song", albumID)
+       
+        let url = URL(string: urlString)
+        return url!
+    }
+    
+    
     private func parse(data: Data) -> [Album] {
         do {
             let decoder = JSONDecoder()
@@ -48,10 +55,11 @@ class SearchService {
     func performSearch(for text: String,completion: @escaping SearchComplete){
         if !text.isEmpty {
             dataTask?.cancel()
-            
+            UIApplication.shared.isNetworkActivityIndicatorVisible =
+            true
          state = .loading
             
-            let url = iTunesURL(searchText: text)
+            let url = iTunesAlbumURL(searchText: text)
             let session = URLSession.shared
             dataTask = session.dataTask(with: url, completionHandler: {
                 data, response, error in
@@ -74,13 +82,37 @@ class SearchService {
                 }
                 DispatchQueue.main.async {
                     self.state = newState
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     completion(success)
+                  
                 }
             })
             dataTask?.resume()
         }
     }
     
+    func getSongsForAlbum(with albumId:Int, completion: @escaping ([String]) -> Void){
+        let url = iTunesSongURL(albumID: albumId)
+        dataTask = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+            var songArray:[String] = []
+            if let httpResponse = response as? HTTPURLResponse,
+                httpResponse.statusCode == 200, let data = data {
+          
+                let searchResults = self.parse(data: data)
+                for result in searchResults {
+                    if let trackName = result.trackName {
+                        songArray.append(trackName)
+                    }
+                }
+                    DispatchQueue.main.async {
+                       
+                        completion(songArray)
+                  }
+            }
+        })
+        dataTask?.resume()
+    }
+        
 }
     
 

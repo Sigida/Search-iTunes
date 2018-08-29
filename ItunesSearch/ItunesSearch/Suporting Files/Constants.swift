@@ -18,5 +18,9 @@ struct CollectionViewCellIdentifiers {
     static let nothingFoundCell = "NothingFoundCell"
     static let loadingCell = "LoadingCell"
 }
+struct TableViewCellIdentifiers {
+    static let SongCell = "SongCell"
+ 
+}
 
 
