@@ -125,10 +125,13 @@ extension SearchViewController: UICollectionViewDelegate {
             return list.count
         }
     }
-    
+    //show info only if have results
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier:Constants.Segue.showDetail, sender: indexPath)
+        switch search.state {
+        case .notSearchedYet, .loading, .noResults: break
+        case .results:
+            self.performSegue(withIdentifier:Constants.Segue.showDetail, sender: indexPath)
+        }
     }
 }
-
 
