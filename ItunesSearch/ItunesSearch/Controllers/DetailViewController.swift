@@ -10,6 +10,8 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
+    // MARK: - Properties
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var artworkImageView: UIImageView!
     @IBOutlet weak var albumNameLabel: UILabel!
@@ -17,17 +19,20 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var trackCountLabel: UILabel!
     @IBOutlet weak var genreLabel: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
+    
     var searchResult: Album!
     var songs = [String]()
     var downloadTask: URLSessionDownloadTask?
+    private let songList = SearchService()
     
-   private let search = SearchService()
+    // MARK: - VC lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if searchResult != nil {
             updateUI()
         }
-        search.getSongsForAlbum(with: searchResult.albumID ) { (resalts:[String]) in
+        songList.getSongsForAlbum(with: searchResult.albumID ) { (resalts:[String]) in
             self.songs = resalts
             print(resalts)
             DispatchQueue.main.async {
@@ -35,20 +40,15 @@ class DetailViewController: UIViewController {
             }
         }
     }
-    deinit {
-        print("deinit \(self)")
-        downloadTask?.cancel()
-        
-    }
+    
     func updateUI() {
-       
         albumNameLabel.text = searchResult.albumName
         genreLabel.text = searchResult.genre
         artistNameLabel.text = searchResult.artistName
-        trackCountLabel.text = String(searchResult.trackCount)
+        trackCountLabel.text = "Track count:\(String(searchResult.trackCount))"
         genreLabel.text = searchResult.genre
         
-       
+        
         // let formatter = DateFormatter()
         // formatter.dateStyle = .medium
         // formatter.timeStyle = .short
@@ -60,29 +60,27 @@ class DetailViewController: UIViewController {
             downloadTask = artworkImageView.loadImage(url: imageURL)
         }
     }
-    
+    deinit {
+        print("deinit \(self)")
+        downloadTask?.cancel()
+    }
 }
 extension DetailViewController: UITableViewDelegate,
 UITableViewDataSource {
     func tableView(_ tableView: UITableView,
-                     numberOfRowsInSection section: Int) -> Int {
-        print(songs.count)
+                   numberOfRowsInSection section: Int) -> Int {
         return songs.count
     }
     
-    func tableView(_ tableView: UITableView,
-                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = TableViewCellIdentifiers.SongCell
-        var cell:UITableViewCell! = tableView.dequeueReusableCell(
-            withIdentifier: cellIdentifier)
+        var cell:UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)
         if cell == nil {
             cell = UITableViewCell(style: .default,
                                    reuseIdentifier: cellIdentifier)
         }
-        
         cell.textLabel!.text = songs[indexPath.row]
         return cell
     }
-    
 }
 

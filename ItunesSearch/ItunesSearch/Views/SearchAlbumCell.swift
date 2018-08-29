@@ -9,7 +9,7 @@
 import UIKit
 
 class SearchAlbumCell: UICollectionViewCell {
-
+    
     @IBOutlet weak var artworkImageView: UIImageView!
     @IBOutlet weak var albumNameLabel: UILabel!
     
@@ -24,12 +24,11 @@ class SearchAlbumCell: UICollectionViewCell {
         downloadTask?.cancel()
         downloadTask = nil
     }
- 
+    
     func configure(for result: Album) {
         albumNameLabel.text = result.albumName
         if let imageURL = URL(string: result.image) {
             downloadTask = artworkImageView.loadImage(url: imageURL)
         }
     }
-
 }

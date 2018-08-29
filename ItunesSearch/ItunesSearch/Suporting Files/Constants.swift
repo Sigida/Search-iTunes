@@ -12,6 +12,9 @@ struct Constants {
     struct Segue {
         static let showDetail = "ShowDetail"
     }
+    struct Tag {
+        static let spinnerTag = 700
+    }
 }
 struct CollectionViewCellIdentifiers {
     static let searchAlbumCell = "SearchAlbumCell"

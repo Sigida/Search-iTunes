@@ -19,6 +19,7 @@
 		845219B821341940002E0795 /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 845219B721341940002E0795 /* LoadingCell.xib */; };
 		845219BA21342914002E0795 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845219B921342914002E0795 /* Album.swift */; };
 		845219BC21343095002E0795 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845219BB21343095002E0795 /* Constants.swift */; };
+		84677D422136F78100E4B97D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84677D412136F78100E4B97D /* Alert.swift */; };
 		8480BF532135B52B005F906A /* UIImageView+DownloadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8480BF522135B52B005F906A /* UIImageView+DownloadImage.swift */; };
 		8480BF552135FF63005F906A /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8480BF542135FF63005F906A /* SearchService.swift */; };
 /* End PBXBuildFile section */
@@ -38,6 +39,7 @@
 		845219B721341940002E0795 /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
 		845219B921342914002E0795 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		845219BB21343095002E0795 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		84677D412136F78100E4B97D /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		8480BF522135B52B005F906A /* UIImageView+DownloadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+DownloadImage.swift"; sourceTree = "<group>"; };
 		8480BF542135FF63005F906A /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -131,6 +133,7 @@
 		8411EFD42133108B001E08BB /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				84677D412136F78100E4B97D /* Alert.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84677D422136F78100E4B97D /* Alert.swift in Sources */,
 				8480BF532135B52B005F906A /* UIImageView+DownloadImage.swift in Sources */,
 				841015B8213322F800E97B17 /* DetailViewController.swift in Sources */,
 				841015BB2133293800E97B17 /* SearchAlbumCell.swift in Sources */,
