@@ -24,7 +24,7 @@ class SearchViewController: UIViewController {
         registerNibs()
         
     }
-    // MARK:- Navigation
+    // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.Segue.showDetail {
             if case .results(let list) = search.state {
@@ -59,10 +59,11 @@ class SearchViewController: UIViewController {
     }
    
 }
+// MARK: - UISearchBarDelegate
+
 extension SearchViewController: UISearchBarDelegate {
 func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     performAlbumSearch()
-
 }
     func performAlbumSearch() {
         search.performSearch(for: searchBar.text!,completion: { success in
@@ -75,23 +76,9 @@ func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
 }
-// MARK:- UICollectionViewDataSource & Delegate
-extension SearchViewController: UICollectionViewDelegate,
-UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch search.state {
-        case .notSearchedYet:
-            return 0
-        case .loading:
-            return 1
-        case .noResults:
-            return 1
-        case .results(let list):
-            return list.count
-        }
-    }
-    
+// MARK: - UICollectionViewDataSource
+
+extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         switch search.state {
         case .notSearchedYet:
@@ -108,9 +95,7 @@ UICollectionViewDataSource {
             
         case .noResults:
             
-            return collectionView.dequeueReusableCell(
-                withReuseIdentifier: CollectionViewCellIdentifiers.nothingFoundCell,
-                for: indexPath)
+            return collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellIdentifiers.nothingFoundCell, for: indexPath)
             
         case .results(let list):
             
@@ -123,9 +108,27 @@ UICollectionViewDataSource {
             return cell
         }
     }
+}
+// MARK:- UICollectionViewDelegate
+
+extension SearchViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch search.state {
+        case .notSearchedYet:
+            return 0
+        case .loading:
+            return 1
+        case .noResults:
+            return 1
+        case .results(let list):
+            return list.count
+        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.performSegue(withIdentifier:Constants.Segue.showDetail, sender: indexPath)
     }
 }
+
 

@@ -25,6 +25,7 @@ class SearchService {
     private var dataTask: URLSessionDataTask? = nil
     
     // MARK:- Private Methods
+    
     //create urls
     private func iTunesAlbumURL(searchText: String) -> URL {
         let encodedText = searchText.addingPercentEncoding(
@@ -54,13 +55,16 @@ class SearchService {
         if !text.isEmpty {
             dataTask?.cancel()
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            // Update state
             state = .loading
             let url = iTunesAlbumURL(searchText: text)
             let session = URLSession.shared
             dataTask = session.dataTask(with: url, completionHandler: {
                 data, response, error in
-                var success = false
+                
                 var newState = State.notSearchedYet
+                var success = false
+                
                 // Was the search cancelled?
                 if let error = error as NSError?, error.code == -999 {
                     return
@@ -71,7 +75,7 @@ class SearchService {
                     var searchResults = self.parse(data: data)
                     if searchResults.isEmpty {
                         newState = .noResults
-                    }else {
+                    } else {
                         searchResults.sort(by: <)
                         newState = .results(searchResults)
                     }
@@ -86,6 +90,7 @@ class SearchService {
             dataTask?.resume()
         }
     }
+    
     func getSongsForAlbum(with albumId:Int, completion: @escaping ([String]) -> Void){
         let url = iTunesSongURL(albumID: albumId)
         dataTask = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
