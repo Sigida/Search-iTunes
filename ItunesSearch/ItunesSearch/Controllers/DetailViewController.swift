@@ -32,43 +32,50 @@ class DetailViewController: UIViewController {
         if searchResult != nil {
             updateUI()
         }
-        songList.getSongsForAlbum(with: searchResult.albumID ) { (resalts:[String]) in
-            self.songs = resalts
-            print(resalts)
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
+        showSongs()
     }
     
     func updateUI() {
         albumNameLabel.text = searchResult.albumName
         genreLabel.text = searchResult.genre
         artistNameLabel.text = searchResult.artistName
-        trackCountLabel.text = "Track count:\(String(searchResult.trackCount))"
+        trackCountLabel.text = "Tracks: \(String(searchResult.trackCount))"
         genreLabel.text = searchResult.genre
-        
-        
-        // let formatter = DateFormatter()
-        // formatter.dateStyle = .medium
-        // formatter.timeStyle = .short
-        // formatter.date(from: searchResult.releaseDate)
-        releaseDateLabel.text = searchResult.releaseDate
-        print ("releaseDte\(String(describing: releaseDateLabel.text))")
+        // Get date
+        let date = getDateRelease(dateString: searchResult.releaseDate!)
+        releaseDateLabel.text = "Release: \(date)"
         // Get image
         if let imageURL = URL(string: searchResult.image) {
             downloadTask = artworkImageView.loadImage(url: imageURL)
         }
     }
+    func getDateRelease(dateString:String)->String {
+        var dateString = dateString
+        let range = dateString.index(dateString.endIndex, offsetBy: -10)..<dateString.endIndex
+        dateString.removeSubrange(range)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-mm-dd"
+        let date = dateFormatter.date(from: dateString)
+        dateFormatter.dateFormat = "yyyy"
+        let newDate = dateFormatter.string(from: date!)
+        return newDate
+    }
+    func showSongs(){
+        songList.getSongsForAlbum(with: searchResult.albumID) { (resalts) in
+            self.songs = resalts
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    //cencel load image
     deinit {
-        print("deinit \(self)")
         downloadTask?.cancel()
     }
 }
-extension DetailViewController: UITableViewDelegate,
-UITableViewDataSource {
-    func tableView(_ tableView: UITableView,
-                   numberOfRowsInSection section: Int) -> Int {
+// MARK: - UITableViewDataSource
+extension DetailViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return songs.count
     }
     

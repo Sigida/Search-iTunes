@@ -56,19 +56,19 @@ class SearchViewController: UIViewController {
         searchBar.delegate = self
         self.navigationItem.titleView = searchBar
         searchBar.becomeFirstResponder()//show keyboard when start the app
-    }
-   
+    }   
 }
 // MARK: - UISearchBarDelegate
 
 extension SearchViewController: UISearchBarDelegate {
-func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    performAlbumSearch()
-}
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        performAlbumSearch()
+    }
+    
     func performAlbumSearch() {
         search.performSearch(for: searchBar.text!,completion: { success in
             if !success {
-                showNetworkError(controller: self)
+                self.showNetworkError()
             }
             self.collectionView.reloadData()
         })        
@@ -112,7 +112,6 @@ extension SearchViewController: UICollectionViewDataSource {
 // MARK:- UICollectionViewDelegate
 
 extension SearchViewController: UICollectionViewDelegate {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch search.state {
         case .notSearchedYet:
