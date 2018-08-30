@@ -13,12 +13,11 @@ extension UIImageView {
         let session = URLSession.shared
         // saves the downloaded file to a temporary location on disk instead of keeping it in memory.
         let downloadTask = session.downloadTask(with: url,
-                                                completionHandler: { [weak self] url, response, error in
-                                                 
-                                                    if error == nil, let url = url,
+                                                completionHandler: { [weak self] url, response, error in                                                    
+                                                    if error == nil,
+                                                        let url = url,
                                                         let data = try? Data(contentsOf: url),
                                                         let image = UIImage(data: data) {
-                                                      
                                                         DispatchQueue.main.async {
                                                             if let weakSelf = self {
                                                                 weakSelf.image = image
@@ -30,5 +29,5 @@ extension UIImageView {
         return downloadTask
     }
 }
-    
+
 

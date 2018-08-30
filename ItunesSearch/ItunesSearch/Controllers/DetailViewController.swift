@@ -11,7 +11,6 @@ import UIKit
 class DetailViewController: UIViewController {
     
     // MARK: - Properties
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var artworkImageView: UIImageView!
     @IBOutlet weak var albumNameLabel: UILabel!
@@ -26,7 +25,6 @@ class DetailViewController: UIViewController {
     private let songList = SearchService()
     
     // MARK: - VC lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         if searchResult != nil {
@@ -34,17 +32,17 @@ class DetailViewController: UIViewController {
         }
         showSongs()
     }
-    
+    // MARK:- Helper Methods
     func updateUI() {
         albumNameLabel.text = searchResult.albumName
         genreLabel.text = searchResult.genre
         artistNameLabel.text = searchResult.artistName
         trackCountLabel.text = "Tracks: \(String(searchResult.trackCount))"
         genreLabel.text = searchResult.genre
-        // Get date
+        //Show date
         let date = getDateRelease(dateString: searchResult.releaseDate!)
-        releaseDateLabel.text = "Release: \(date)"
-        // Get image
+        releaseDateLabel.text = "Year: \(date)"
+        //Get image
         if let imageURL = URL(string: searchResult.image) {
             downloadTask = artworkImageView.loadImage(url: imageURL)
         }
@@ -80,13 +78,8 @@ extension DetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellIdentifier = TableViewCellIdentifiers.SongCell
-        var cell:UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)
-        if cell == nil {
-            cell = UITableViewCell(style: .default,
-                                   reuseIdentifier: cellIdentifier)
-        }
-        cell.textLabel!.text = songs[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCellIdentifiers.SongCell) as! SongTableViewCell
+        cell.songLabel.text = songs[indexPath.row]
         return cell
     }
 }

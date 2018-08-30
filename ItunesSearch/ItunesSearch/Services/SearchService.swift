@@ -61,10 +61,8 @@ class SearchService {
             let session = URLSession.shared
             dataTask = session.dataTask(with: url, completionHandler: {
                 data, response, error in
-                
                 var newState = State.notSearchedYet
                 var success = false
-                
                 // Was the search cancelled?
                 if let error = error as NSError?, error.code == -999 {
                     return

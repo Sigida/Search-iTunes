@@ -35,7 +35,8 @@ class SearchViewController: UIViewController {
                 detailViewController.searchResult = searchResult
             }
         }
-    }    
+    }
+    // Register collection view cells
     func registerNibs(){
         var cellNib = UINib(nibName:CollectionViewCellIdentifiers.searchAlbumCell,
                             bundle:nil)
