@@ -144,6 +144,7 @@
                                                 <constraint firstItem="tMy-tr-BtN" firstAttribute="leading" secondItem="Er8-bi-7v6" secondAttribute="leading" constant="10" id="EJ4-1j-L3i"/>
                                                 <constraint firstItem="tMy-tr-BtN" firstAttribute="top" secondItem="Er8-bi-7v6" secondAttribute="top" constant="5" id="Qrh-iR-zjr"/>
                                                 <constraint firstAttribute="trailing" secondItem="tMy-tr-BtN" secondAttribute="trailing" constant="5" id="tpY-Uq-mE1"/>
+                                                <constraint firstAttribute="bottom" secondItem="tMy-tr-BtN" secondAttribute="bottom" constant="4.5" id="zin-yU-ewj"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
