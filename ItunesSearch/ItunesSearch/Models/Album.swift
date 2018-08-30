@@ -31,7 +31,7 @@ class Album: Codable {
         case trackCount
         case releaseDate
     }
-    
+    //helper method for sorting
     static func < (lhs: Album, rhs: Album) -> Bool {
         return lhs.albumName.localizedStandardCompare(rhs.albumName) == .orderedAscending
     }

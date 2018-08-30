@@ -14,7 +14,8 @@ extension UIViewController {
                                       message: "There was an error accessing the iTunes Store. Please try again.",
                                       preferredStyle: .alert)
         let action = UIAlertAction(title: "OK",
-                                   style: .default, handler: nil)
+                                   style: .default,
+                                   handler: nil)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }

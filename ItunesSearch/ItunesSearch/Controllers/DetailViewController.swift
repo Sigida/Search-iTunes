@@ -47,6 +47,7 @@ class DetailViewController: UIViewController {
             downloadTask = artworkImageView.loadImage(url: imageURL)
         }
     }
+    //format the date
     func getDateRelease(dateString:String)->String {
         var dateString = dateString
         let range = dateString.index(dateString.endIndex, offsetBy: -10)..<dateString.endIndex
